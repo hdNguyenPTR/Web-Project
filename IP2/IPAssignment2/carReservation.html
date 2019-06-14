@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Car Reservation</title>
+    <link rel="stylesheet" type="text/css" href="css.css">
+    <script>
+        function loadXML() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+              if (this.readyState == 4 && this.status == 200) {
+                loadCart(this);
+              }
+            };
+            xhttp.open("GET", "cars.xml", true);
+            xhttp.send();
+        }
+        function check(){
+            var daysR = 0;
+            var total = 0;
+            var u;
+            for (u = 0; u < localStorage.length; u++) {
+                daysR += document.getElementsByClassName("days")[u].value;
+                total += document.getElementsByClassName("days")[u].value * document.getElementsByClassName("cost")[u].innerHTML;
+            }
+         
+            if(daysR > 0){
+                window.location = "checkOut.html";
+                localStorage.setItem("t", total);
+            } else {
+                alert("No car has been reserved");
+                window.location = "index2.html";
+            }
+        }
+        function loadCart(xml) {
+            var i;
+            var cart;
+            var xmlDoc = xml.responseXML;
+            var table = "<tr style=\"height: 20px; color: cornflowerblue\">" +
+        "<th style=\"width: 20%;\" class=\"cart_header\">Thumbnail</th>" +
+        "<th style=\"width: 20%;\" class=\"cart_header\">Vehicle</th>" +
+        "<th style=\"width: 20%;\" class=\"cart_header\">Price Per Day</th>"+
+        "<th style=\"width: 20%;\" class=\"cart_header\">Rental Days</th>"+
+        "<th style=\"width: 20%;\" class=\"cart_header\">Actions</th>"+
+        "</tr>";
+            var x = xmlDoc.getElementsByTagName("car");
+            localStorage.removeItem("t");
+            for (i = 0; i <localStorage.length; i++) {                
+                cart = localStorage.getItem(i) - 1;
+                table += "<tr><td><img src=\"images/Camry.jpg\" style=\"width: 120px; height: 90px\"></td><td>" +
+                    x[cart].getElementsByTagName("brand")[0].childNodes[0].nodeValue + " " + 
+                    x[cart].getElementsByTagName("model")[0].childNodes[0].nodeValue + " " +
+                    x[cart].getElementsByTagName("modelyear")[0].childNodes[0].nodeValue + 
+                    "</td><td class=\"cost\">" + x[cart].getElementsByTagName("price")[0].childNodes[0].nodeValue + 
+                    "<td> <input type=\"text\" class=\"days\" value=\"1\" width=\"40px\" height=\"20px\"></td><td> \n\
+                    <button class=\"deleteBtn\">Delete</button></td></tr>"
+                    ;
+            } 
+            //+ x[i].getElementsByTagName("availability")[0].childNodes[0].nodeValue +
+//            table += "</tr>";
+            document.getElementById("cartTable").innerHTML = table;
+        }
+        window.onload = loadXML;
+    </script>
+</head>
+<body>
+<h2 style="text-align: center">Car Reservation</h2>
+<table id="cartTable" border="0" rules=none cellspacing=0 style="width: 100%; color: cornflowerblue; text-align: center">
+    <!--tr style="height: 20px; color: cornflowerblue">
+        <th style="width: 20%;" class="cart_header">Thumbnail</th>
+        <th style="width: 20%;" class="cart_header">Vehicle</th>
+        <th style="width: 20%;" class="cart_header">Price Per Day</th>
+        <th style="width: 20%;" class="cart_header">Rental Days</th>
+        <th style="width: 20%;" class="cart_header">Actions</th>
+    </tr>
+    <tr>
+        <td>
+            <img src="images/Camry.jpg" style="width: 120px; height: 90px">
+        </td>
+        <td>
+            2018-Wolswagen-Golf
+        </td>
+        <td>
+            180
+        </td>
+        <td>
+            <input value="1" width="40px" height="20px">
+        </td>
+        <td>
+            <button class="deleteBtn">Delete</button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <img src="images/Camry.jpg" style="width: 120px; height: 90px">
+        </td>
+        <td>
+            2018-Wolswagen-Golf
+        </td>
+        <td>
+            180
+        </td>
+        <td>
+            <input value="1" width="40px" height="20px">
+        </td>
+        <td>
+            <button class="deleteBtn">Delete</button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <img src="images/Camry.jpg" style="width: 120px; height: 90px">
+        </td>
+        <td>
+            2018-Wolswagen-Golf
+        </td>
+        <td>
+            180
+        </td>
+        <td>
+            <input value="1" width="40px" height="20px">
+        </td>
+        <td>
+            <button class="deleteBtn">Delete</button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <img src="images/Camry.jpg" style="width: 120px; height: 90px">
+        </td>
+        <td>
+            2018-Wolswagen-Golf
+        </td>
+        <td>
+            180
+        </td>
+        <td>
+            <input value="1" width="40px" height="20px">
+        </td>
+        <td>
+            <button class="deleteBtn">Delete</button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <img src="images/Camry.jpg" style="width: 120px; height: 90px">
+        </td>
+        <td>
+            2018-Wolswagen-Golf
+        </td>
+        <td>
+            180
+        </td>
+        <td>
+            <input value="1" width="40px" height="20px">
+        </td>
+        <td>
+            <button class="deleteBtn">Delete</button>
+        </td>
+    </tr-->
+</table>
+<a >
+    <button class="checkoutBtn" onclick="check()">
+        Check Out
+    </button>
+</a>
+</body>
+</html>

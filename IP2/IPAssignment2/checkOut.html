@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Checkout</title>
+    <link rel="stylesheet" type="text/css" href="css.css">
+    <script type="text/javascript">
+        window.onload = pay;
+        function pay(){
+            document.getElementById("totalCost").innerHTML = "You are required to pay $ " + localStorage.getItem("t");
+        }
+        function validate() {
+            var flag = true;
+            var error= 0;
+            document.checkOut.firstname.style.background = "white";
+            document.checkOut.lastname.style.background = "white";
+            document.checkOut.address.style.background = "white";
+            document.checkOut.suburb.style.background = "white";
+            document.checkOut.state.style.background = "white";
+            document.checkOut.country.style.background = "white";
+            document.checkOut.postcode.style.background = "white";
+            document.checkOut.email.style.background = "white";
+
+            if(document.checkOut.firstname.value == "") {
+                error= 1;
+                document.checkOut.firstname.focus();
+                document.checkOut.firstname.style.background = "#E35E00";
+                flag = false;
+            }
+
+            if(document.checkOut.lastname.value == "") {
+                error= 1;
+                document.checkOut.lastname.focus();
+                document.checkOut.lastname.style.background = "#E35E00";
+                flag = false;
+            }
+
+            if(document.checkOut.address.value == "") {
+                error= 1;
+                document.checkOut.address.focus();
+                document.checkOut.address.style.background = "#E35E00";
+                flag = false;
+            }
+
+            if(document.checkOut.suburb.value == "") {
+                error= 1;
+                document.checkOut.suburb.focus();
+                document.checkOut.suburb.style.background = "#E35E00";
+                flag = false;
+            }
+
+            if(document.checkOut.state.value == "") {
+                error= 1;
+                document.checkOut.state.focus();
+                document.checkOut.state.style.background = "#E35E00";
+                flag = false;
+            }
+
+            if(document.checkOut.country.value == "") {
+                error= 1;
+                document.checkOut.country.focus();
+                document.checkOut.country.style.background = "#E35E00";
+                flag = false;
+            }
+
+            if(document.checkOut.postcode.value == "") {
+                error= 1;
+                document.checkOut.postcode.focus();
+                document.checkOut.postcode.style.background = "#E35E00";
+                flag = false;
+            }
+
+            if(isNaN(document.checkOut.postcode.value)) {
+                error= 2;
+                document.checkOut.postcode.focus();
+                document.checkOut.postcode.style.background = "#E35E00";
+                flag = false;
+            }
+
+            if(document.checkOut.email.value == "") {
+                error= 1;
+                document.checkOut.email.focus();
+                document.checkOut.email.style.background = "#E35E00";
+                flag = false;
+            }
+
+            var emailFilter=/^\w+[\+\.\w-]*@([\w-]+\.)*\w+[\w-]*\.([a-z]{2,4}|\d+)$/i;
+            if(document.checkOut.email.value != "" && emailFilter.test(document.checkOut.email.value) == false) {
+                error= 3;
+                document.checkOut.email.focus();
+                document.checkOut.email.style.background = "#E35E00";
+                flag = false;
+            }
+
+            if(flag == false) {
+                switch (error) {
+                    case 1: alert("The required field has not been filled in!");
+                        break;
+                    case 2: alert("Please enter a valid postcode!");
+                        break;
+                    case 3: alert("Please enter a valid email address!");
+                        break;
+                }
+            } else {
+                document.forms.checkOut.submit();
+            }
+
+        }
+    </script>
+</head>
+<body>
+<h2 style="text-align: center">Check Out</h2>
+<h3 style="font-size: 14px;">
+    Customer Details and Payment
+</h3>
+<p style="display: inline">
+    Please fill in your detials. <p style="color: red; display: inline">*</p> indicates required field.
+</p>
+<form name="checkOut" method="post">
+    <table align="center" cellpadding="0" id="checkout_table" style="text-align: right">
+        <tr>
+            <td style="width: 25%">
+                <p style="color: red; display: inline">*</p>First Name
+            </td>
+            <th>
+                <input type="text" name="firstname" size="45"/ >
+            </th>
+        </tr>
+        <tr>
+            <td>
+                <p style="color: red; display: inline;">*</p>Last Name
+            </td>
+            <th>
+                <input type="text" name="lastname" size="45"/>
+            </th>
+        </tr>
+        <tr>
+            <td>
+                <p style="color: red;display: inline;">*</p>Email Address
+            </td>
+            <th>
+                <input type="text" name="address" size="45"/>
+            </th>
+        </tr>
+        <tr>
+            <td>
+                <p style="color: red;display: inline;">*</p>Address Line 1
+            </td>
+            <th>
+                <input type="text" name="address" size="45"/>
+            </th>
+        </tr>
+        <tr>
+            <td>
+                Address Line 2
+            </td>
+            <th>
+                <input type="text" name="address" size="45"/>
+            </th>
+        </tr>
+        <tr>
+            <td>
+                <p style="color: red;display: inline;">*</p>City
+            </td>
+            <th>
+                <input type="text" name="city" size="45"/>
+            </th>
+        </tr>
+        <tr>
+            <td>
+                <p style="color: red;display: inline;">*</p>State
+            </td>
+            <th>
+                <select name="state" style="width: 88%;">
+                    <option value="Australian Capital Territory"  selected="selected">Australian Capital Territory</option>
+                    <option value="New South Wales">New South Wales</option>
+                    <option value="Queensland">Queensland</option>
+                    <option value="South Australia">South Australia</option>
+                    <option value="Tasmania">Tasmania</option>
+                    <option value="Victoria">Victoria</option>
+                    <option value="Western Australia">Western Australia</option>
+                </select>
+            </th>
+        </tr>
+        <tr>
+            <td>
+                <p style="color: red; display: inline;">*</p>Post Code
+            </td>
+            <th>
+                <input type="text" name="postcode" size="45"/>
+            </th>
+        </tr>
+        <tr>
+            <td>
+                <p style="color: red;display: inline;">*</p>Payment Type
+            </td>
+            <th>
+                <select name="state" style="width: 88%;">
+                    <option value="Vis"  selected="selected">Visa</option>
+                    <option value="NMaster Card">Master Card</option>
+                    <option value="PayPal">PayPal</option>
+                </select>
+            </th>
+        </tr>
+    </table>
+</form>
+<h3 id="totalCost">
+<!--    You are required to pay $ <p style="display: inline">3</p>-->
+</h3>
+<table>
+    <tr>
+        <button class="bookingBtn" onclick="validate();">Booking</button>
+        <button class="continueBtn">Continue Selection</button>
+    </tr>
+</table>
+</body>
+</html>

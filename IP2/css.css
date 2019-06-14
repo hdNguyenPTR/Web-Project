@@ -1,0 +1,75 @@
+h1 {
+
+    font-size: 26px;
+    line-height: 60px;
+    text-align: center;
+    color: white;
+    font-family: Helvetica;
+}
+
+.CarReservation {
+    border: none;
+    background: white;
+    width: 160px;
+    height: 36px;
+    color: deepskyblue;
+    margin-left: 400px;
+    font-size: 20px;
+    box-shadow: 1px 1px 1px deepskyblue;
+}
+
+img {
+    width:220px;
+    height: 180px;
+}
+
+.addtoCart{
+    border: none;
+    background: deepskyblue;
+    color: white;
+    width: 140px;
+    height: 30px;
+    margin: 20px 20px 20px 20px
+}
+
+
+.deleteBtn{
+    border: none;
+    background: deepskyblue;
+    color: white;
+    width: 70px;
+    height: 22px;
+    margin-left: 20px;
+}
+
+.checkoutBtn{
+    border: none;
+    background: deepskyblue;
+    color: white;
+    width: 200px;
+    height: 30px;
+    float:right;
+    margin-right: 20px;
+}
+
+.continueBtn{
+    border: none;
+    background: deepskyblue;
+    color: white;
+    width: 200px;
+    height: 40px;
+    float:right;
+    font-size: 18px;
+    margin-right: 20px;
+}
+
+.bookingBtn{
+    border: none;
+    background: deepskyblue;
+    color: white;
+    width: 180px;
+    height: 40px;
+    float:right;
+    font-size: 18px;
+    margin-right: 20px;
+}
